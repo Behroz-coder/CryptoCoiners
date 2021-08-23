@@ -1,0 +1,88 @@
+
+{% extends 'cryptocoinersite/basic.html' %}
+{% block title %} VIB - SignUp {% endblock title %}  
+{% block body %}
+     {% load static %}
+
+
+<!-- ======= Contact Section ======= -->
+  ======= Contact Section ======= -->
+    <section id="contact" class="contact mt-5 section-bg">
+      <div class="container" data-aos="fade-up">
+{% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+
+      {% if message.tags == "success" %}
+      <strong>Well done!</strong> {{ message}}
+      {% else %}
+      <strong>Error!</strong> {{ message}}
+      {% endif %}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}           
+        <div class="section-title">
+          <h2>SIGN UP</h2>
+
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-3">
+
+            </div>
+
+
+          <div class="col-lg-6">
+            <form action="" method="post" name="reg" role="form" class="php-email-form">
+            {% csrf_token %}
+            
+              <div class="form-group">
+                <input type="text" class="form-control" name="username" id="username" placeholder="User Name" required>
+              </div>
+               <div class="form-group">
+                <input type="text" class="form-control" name="email" id="email" placeholder="Email" required>
+              </div>
+               
+              <div class="form-group" id="cname" style="display: none;">
+                {% comment %} <input type="text" class="form-control" name="companyName" id="companyName" placeholder="Company Name" > {% endcomment %}
+              </div>
+               <div class="form-group">
+                <input type="Password" class="form-control" name="password" id="password" placeholder="Password" required>
+              </div>
+               <div class="form-group">
+                <input type="Password" class="form-control" name="cpassword" id="cpassword" placeholder="Confirm Password" required>
+              </div>
+              
+              
+              <div class="text-center"><button type="submit">SignUp</button></div>
+            </form>
+          </div>
+            
+        </div>
+
+      </div>
+    </section>
+
+
+
+
+
+{% endblock body %}
+{% block script %}
+<script type="text/javascript">
+
+function ChangeDropdowns(value){
+    if(value=="Candidate"){
+        document.getElementById('cname').style.display='none';
+        document.getElementById('cname').innerHTML="";
+        
+    }else if(value=="Company"){
+        document.getElementById('cname').style.display='block';
+        document.getElementById('cname').innerHTML="<input type='text' class='form-control' name='companyName' id='companyName' placeholder='Company Name' required>";
+        
+        
+    }
+    
+}
+</script>
+{% endblock script %}
+

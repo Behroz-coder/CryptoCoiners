@@ -1,0 +1,54 @@
+{% extends 'cryptocoinersite/basic.html' %}
+{% block title %} CryptoCoiners - Login {% endblock title %}
+{% block body %}
+{% load static %}
+
+
+<!-- ======= Contact Section ======= -->
+<section id="contact" class="contact mt-5 section-bg">
+  <div class="container" data-aos="fade-up">
+    
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+
+      {% if message.tags == "success" %}
+      <strong>Well done!</strong> {{ message}}
+      {% else %}
+      <strong>Error!</strong> {{ message}}
+      {% endif %}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    
+    <div class="section-title">
+      <h2>Login</h2>
+
+    </div>
+
+    <div class="row" data-aos="fade-up" data-aos-delay="100">
+      <div class="col-lg-3">
+
+      </div>
+
+
+      <div class="col-lg-6">
+        <form action="" method="post" role="form" class="php-email-form">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" class="form-control" name="username" id="username" placeholder="User Name" required>
+          </div>
+          <div class="form-group">
+            <input type="Password" class="form-control" name="password" id="password" placeholder="Password" required>
+          </div>
+          <div class="text-center"><button type="submit">Login</button></div>
+          <a href="/signup" class="signup-image-link">Create New Account</a>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</section><!-- End Contact Section -->
+
+
+{% endblock body %}
