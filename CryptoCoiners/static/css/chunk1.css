@@ -54,7 +54,7 @@ html {
 *,
 :after,
 :before {
-    box-sizing: inherit
+    box-sizing: inherit;
 }
 
 a {
@@ -563,7 +563,8 @@ textarea {
     }
 
     .Footer_footerPromote__lzI55 {
-        font-size: 1.6rem
+        font-size: 3.6rem;
+        font-weight: bold;
     }
 
     .Footer_footerContent__23Ozm {
