@@ -5,11 +5,11 @@
 
 
 <!-- ======= Contact Section ======= -->
-<section id="contact" class="contact mt-5">
+<section id="contact" class="contact ">
   <div class="container" data-aos="fade-up">
 
     {% for message in messages %}
-    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-5" role="alert">
 
       {% if message.tags == "success" %}
       <strong>Well done!</strong> {{ message}}

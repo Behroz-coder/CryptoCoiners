@@ -418,13 +418,14 @@ h1, h2, h3, h4, h5, h6 {
 # Sections General
 --------------------------------------------------------------*/
 section {
-  margin-top: 40px;
+  margin-top: 55px;
   overflow: hidden;
   position: relative;
 }
 
 .section-title {
   text-align: center;
+  margin-top: 41px;
   padding-bottom: 30px;
   position: relative;
 }
@@ -436,6 +437,7 @@ section {
   margin-bottom: 20px;
   padding-bottom: 20px;
   position: relative;
+  color: white;
 }
 
 .section-title h2::after {

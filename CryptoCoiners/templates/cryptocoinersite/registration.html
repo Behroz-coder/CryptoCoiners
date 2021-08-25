@@ -1,16 +1,16 @@
 
 {% extends 'cryptocoinersite/basic.html' %}
-{% block title %} VIB - SignUp {% endblock title %}  
+{% block title %} CryptoCoiners - SignUp {% endblock title %}  
 {% block body %}
      {% load static %}
 
 
 <!-- ======= Contact Section ======= -->
   ======= Contact Section ======= -->
-    <section id="contact" class="contact mt-5 section-bg">
-      <div class="container" data-aos="fade-up">
+    <section id="contact" class="contact  ">
+      <div class="container mt-40" data-aos="fade-up">
 {% for message in messages %}
-    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-5" role="alert">
 
       {% if message.tags == "success" %}
       <strong>Well done!</strong> {{ message}}
@@ -31,7 +31,7 @@
             </div>
 
 
-          <div class="col-lg-6">
+          <div class="col-lg-6 mb-5">
             <form action="" method="post" name="reg" role="form" class="php-email-form">
             {% csrf_token %}
             

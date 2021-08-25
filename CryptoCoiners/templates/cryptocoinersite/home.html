@@ -40,6 +40,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            {% for coin in allcoin  %}
                                 <tr>
                                     <td>
                                         <div class="CoinList_coinLogo__2FFG-">
@@ -47,19 +48,20 @@
                                                 {% comment %} <source srcset="/3212.webp?v=0" type="image/webp">
                                                 <source srcset="/3212.png?v=0" type="image/png"> {% endcomment %}
                                                 <img src=""
-                                                    alt=""></picture>SHARKCAKE
+                                                    alt=""></picture>{{coin.coin_name}}
                                         </div>
                                     </td>
-                                    <td>SCAKE</td>
+                                    <td>{{coin.coin_symbol}}</td>
                                     <td class="CoinList_priceComparison__3yaqb">
-                                        <div><img src="" alt="">+0.38%</div>
+                                        <div><img src="" alt="">{{coin.price}}%</div>
                                     </td>
-                                    <td>$414,247</td>
-                                    <td>6 days ago</td>
+                                    <td>${{coin.market_cap}}</td>
+                                    <td>{{coin.launch_date}}</td>
                                     <td><button
-                                            class="UpvoteButton_UpvoteButton__2emOP false UpvoteButton_small__3vQ9d"><span>🚀</span>11524</button>
+                                            class="UpvoteButton_UpvoteButton__2emOP false UpvoteButton_small__3vQ9d"><span>🚀</span>{{coin.vote}}</button>
                                     </td>
                                 </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </section>
@@ -83,6 +85,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            {% for coin in allcoin  %}
                                 <tr>
                                     <td>
                                         <div class="CoinList_coinLogo__2FFG-">
@@ -95,20 +98,20 @@
                                                     type="image/png"><img
                                                     src="https://imgurupload.org/files/6984BA34-35F9-4E89-A00C-E0E40309155C.jpeg"
                                                     alt=""></picture> {% endcomment %}
-                                                    BABY UNI
+                                                    {{coin.coin_name}}
                                         </div>
                                     </td>
-                                    <td>BABYU</td>
+                                    <td>{{coin.coin_symbol}}</td>
                                     <td class="CoinList_priceComparison__3yaqb">
-                                        <div><img src="" alt="">-1.86%</div>
+                                        <div><img src="" alt="">{{coin.price}}%</div>
                                     </td>
-                                    <td>$2,026</td>
-                                    <td>Today</td>
+                                    <td>${{coin.market_cap}}</td>
+                                    <td>{{coin.launch_date}}</td>
                                     <td><button
-                                            class="UpvoteButton_UpvoteButton__2emOP false UpvoteButton_small__3vQ9d"><span>🚀</span>3015</button>
+                                            class="UpvoteButton_UpvoteButton__2emOP false UpvoteButton_small__3vQ9d"><span>🚀</span>{{coin.vote}}</button>
                                     </td>
                                 </tr>
-
+   {% endfor %}
                             </tbody>
                         </table>
                         <button class="CoinList_showMoreButton__38tgO"><img src=""

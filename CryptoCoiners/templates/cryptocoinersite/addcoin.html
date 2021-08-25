@@ -26,31 +26,42 @@
 <!-- ======= Testimonials Section ======= -->
 <section id="testimonials" class="testimonials">
     <div class="container" data-aos="fade-up">
+{% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-5" role="alert">
 
+      {% if message.tags == "success" %}
+      <strong>Well done!</strong> {{ message}}
+      {% else %}
+      <strong>Error!</strong> {{ message}}
+      {% endif %}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}  
         <section><a class="App_goBackLink__3AM8g" href="/">Back
                 To Main</a>
             <section>
-                <form class="AddCoinForm_AddCoinForm__13uq-">
+                <form class="AddCoinForm_AddCoinForm__13uq-" method="POST">
+                        {% csrf_token %}
                     <div class="AddCoinForm_columns__2a0Ki">
                         <div>
                             <h3>Coin info</h3>
                             <div class="AddCoinForm_formGroup__1kxWq"><label for="name">Name</label><span
                                     class="AddCoinForm_required__2V4xi">Required</span><input placeholder="e.g. Bitcoin"
-                                    name="name"></div>
+                                    name="name" required></div>
                             <div class="AddCoinForm_formGroup__1kxWq"><label for="symbol">Symbol</label><span
                                     class="AddCoinForm_required__2V4xi">Required</span><input placeholder="e.g. BTC"
-                                    name="symbol"></div>
+                                    name="symbol" required></div>
                             <div class="AddCoinForm_formGroup__1kxWq"><label for="description">Description</label><span
                                     class="AddCoinForm_required__2V4xi">Required</span><textarea
                                     placeholder="e.g. Bitcoin is a decentralized digital currency"
-                                    name="description"></textarea></div>
+                                    name="description" required></textarea></div>
                             <div class="AddCoinForm_formGroup__1kxWq"><label for="marketCap">Market Cap in
-                                    USD</label><input placeholder="e.g. 150000" name="marketCap"></div>
+                                    USD</label><input placeholder="e.g. 150000" name="marketCap" required></div>
                             <div class="AddCoinForm_formGroup__1kxWq"><label for="price">Price in USD</label><input
-                                    placeholder="e.g. 0.006" name="price"></div>
+                                    placeholder="e.g. 0.006" name="price"    required></div>
                             <div class="AddCoinForm_formGroup__1kxWq"><label for="launchDate">Launch date
                                     (YYYY-MM-DD)</label><span class="AddCoinForm_required__2V4xi">Required</span><input
-                                    placeholder="e.g. 2021-01-28" name="launchDate"></div>
+                                    placeholder="e.g. 2021-01-28" name="launchDate" type="date" required></div>
                             
                         </div>
                         <div>

@@ -411,10 +411,18 @@
                 <ul>
                     {% comment %} <li><a class="nav-link scrollto {% block tabhome %}{% endblock tabhome %}"
                             href="/">Home</a></li> {% endcomment %}
-
-                    <li><a class="nav-link scrollto {% block tabhome %}{% endblock tabhome %}" href="/addcoin/">Add
+                    <li>
+                        <a class="nav-link scrollto {% block tabhome %}{% endblock tabhome %}" href="/addcoin">Add
                             Coin</a>
                     </li>
+                    {% if user.is_authenticated %}
+                    {% if request.session.Utype == "user" %}
+                        <li>
+                        <a class="nav-link scrollto " href="/profile">Profile</a>
+                    </li>
+                    {% endif %}
+                    {% endif %}
+                    
 
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -425,7 +433,16 @@
 
             {% comment %} <a href="/schedule" class="get-started-btn scrollto">Schedule Interview</a> {% endcomment %}
             {% comment %} <a href="/login" class="get-started-btn scrollto">Add Coin</a> {% endcomment %}
+             {% if user.is_authenticated %}
+            {% if request.session.Utype == "user" %}
+           <a href="/logout" class="get-started-btn scrollto">Logout</a>
+            {% else %}
+                <a href="/login" class="get-started-btn scrollto">Login</a>
+            {% endif %}
+            {% else %}
             <a href="/login" class="get-started-btn scrollto">Login</a>
+            {% endif %}
+            
         </div>
     </header><!-- End Header -->
 
@@ -447,7 +464,7 @@
 
             <footer class="Footer_footer__2NNgL" style="justify-content: center;">
                 <div class="Footer_footerContent__23Ozm">
-                    <h1 class="Footer_footerPromote__lzI55"><a href="/promote">CryptoCoiners.</a></h1>
+                    <h1 class="Footer_footerPromote__lzI55"><a href="/">CryptoCoiners.</a></h1>
                     <div class="Footer_footerLinks__2gEQf"><a href="/disclaimer">Disclaimer</a><a
                             href="/privacy">Privacy Policy</a><a href="/terms">Terms &amp; Conditions</a></div>
                     <div class="Footer_footerCopyRights__1glLI">CrypotoCoiners. © 2021 - contact@cryptocoiners.com</div>
