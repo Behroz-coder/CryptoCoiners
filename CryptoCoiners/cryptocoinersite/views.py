@@ -6,7 +6,9 @@ from django.contrib.auth.models import User
 # Create your views here.
 def index(index):
     return render(index, 'cryptocoinersite/home.html')
-
+def addcoin(request):
+    return render(request, 'cryptocoinersite/addcoin.html')
+ 
 def ulogin(request):
     if request.method == "POST":
         # Get the post parameters

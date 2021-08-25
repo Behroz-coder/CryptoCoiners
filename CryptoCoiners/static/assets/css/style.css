@@ -73,7 +73,7 @@ h1, h2, h3, h4, h5, h6 {
 # Header
 --------------------------------------------------------------*/
 #header {
-  background: #fff;
+  background: #181d23;
   transition: all 0.5s;
   z-index: 997;
   padding: 20px 0;
@@ -93,7 +93,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #header .logo a {
-  color: #111111;
+  color: WHITE;
 }
 
 #header .logo a span {
@@ -162,7 +162,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
   font-size: 15px;
   font-weight: 600;
-  color: #111111;
+  color: white;
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -174,7 +174,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar a:hover, .navbar .active, .navbar li:hover > a {
-  color: #e03a3c;
+  color: WHITE;
 }
 
 .navbar .dropdown ul {
