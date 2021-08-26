@@ -11,7 +11,8 @@ class Extend(models.Model):
     
 class Coin(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE ,null=True)
+    user = models.CharField(max_length=200)
     coin_name = models.CharField(max_length=200)
     coin_symbol = models.CharField(max_length=200)
     coin_discription = models.CharField(max_length=800)

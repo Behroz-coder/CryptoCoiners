@@ -420,6 +420,18 @@
                         <li>
                         <a class="nav-link scrollto " href="/profile">Profile</a>
                     </li>
+                        <li>
+                        <a class="nav-link scrollto " href="/profile">My Vote</a>
+                    </li>
+                    </li>
+                        <li>
+                        <a class="nav-link scrollto " href="/profile">My Coin</a>
+                    </li>
+                    {% else %}
+                     </li>
+                        <li>
+                        <a class="nav-link scrollto " href="/profile">Dashboard</a>
+                    </li>
                     {% endif %}
                     {% endif %}
                     
@@ -434,13 +446,13 @@
             {% comment %} <a href="/schedule" class="get-started-btn scrollto">Schedule Interview</a> {% endcomment %}
             {% comment %} <a href="/login" class="get-started-btn scrollto">Add Coin</a> {% endcomment %}
              {% if user.is_authenticated %}
-            {% if request.session.Utype == "user" %}
-           <a href="/logout" class="get-started-btn scrollto">Logout</a>
+                {% if request.session.Utype == "user" %}
+                    <a href="/logout" class="get-started-btn scrollto">Logout</a>
+                {% else %}
+                    <a href="/logout" class="get-started-btn scrollto">Logout</a>
+                {% endif %}
             {% else %}
                 <a href="/login" class="get-started-btn scrollto">Login</a>
-            {% endif %}
-            {% else %}
-            <a href="/login" class="get-started-btn scrollto">Login</a>
             {% endif %}
             
         </div>

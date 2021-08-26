@@ -14,10 +14,25 @@ from django.shortcuts import redirect, HttpResponseRedirect
 def index(index):
     allcoin = Coin.objects.all()
     return render(index, 'cryptocoinersite/home.html' , {'allcoin':allcoin})
+    
+def disclaimer(request):
+    return render(request, 'cryptocoinersite/disclaimer.html' )
+
+def privacy(request):
+    return render(request, 'cryptocoinersite/privacy.html' )
+
+def terms(request):
+    return render(request, 'cryptocoinersite/terms.html' )
+
 def addcoin(request):
     if request.method == "POST":
         # Get the post parameters
-        user = User.objects.get(username=request.user.username)
+        if(request.user.username):
+            print(request.user.username)
+            user = User.objects.get(username=request.user.username)
+        else:
+            user = ''
+        # user = User.objects.get(username=request.user.username)
         name = request.POST['name']
         symbol = request.POST['symbol']
         description = request.POST['description']
@@ -77,10 +92,10 @@ def ulogin(request):
                 request.session['Utype']=type
                 return redirect('/')
                 # return render(request, 'cryptocoinersite/home.html')
-            # if(type=="Company"):
-            #     request.session['Utype']=type
-            #     return redirect('/company/dashboard1/')
-            #     return render(request, 'company/dashboard.html')
+            if(type=="admin"):
+                request.session['Utype']=type
+                return redirect('/')
+                # return render(request, 'company/dashboard.html')
         
         else:
             messages.error(request, "Invalid credentials! Please try again")
