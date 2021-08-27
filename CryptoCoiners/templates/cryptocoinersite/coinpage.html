@@ -1,0 +1,116 @@
+{% extends 'cryptocoinersite/basic.html' %}
+{% block title %} CryptoCoiners - coin {% endblock title %}
+{% block tabhome %} active {% endblock tabhome %}
+{% block body %}
+{% load static %}
+
+
+<section id="testimonials" class="testimonials">
+    <div class="container" data-aos="fade-up">
+
+        <section>
+            <a class="App_goBackLink__3AM8g" href="/">Back
+                To Main</a>
+            <section class="CoinView_CoinView__2nejv">
+                <div class="CoinView_mainPart__KVNG_">
+                    <div class="CoinView_coinInfo__UjPde">
+                        <picture>
+                            <source srcset="/3212.webp?v=0" type="image/webp">
+                            <source srcset="/3212.png?v=0" type="image/png"><img class="CoinView_coinLogo__1Y7ix"
+                                src="/3212.png?v=0" alt=""></picture>
+                        <div>
+                            <h2 class="CoinView_coinName__7TUYw">{{coin.coin_name}}</h2>
+                            <div class="CoinView_coinPanels__2GGkS"><span
+                                    class="CoinView_coinSymbol__1zU5h">{{coin.coin_symbol}}</span>
+                                <div class="CoinView_coinVoteCounts__HICrp">
+                                    <div><span>Votes </span><span>{{coin.vote}}</span></div>
+                                    <div><span>Today </span><span>{{coin.vote}}</span></div>
+                                </div>
+                                <div class="CoinView_coinComparisons__2idI1">
+                                    <div><span>1h </span><span>
+                                            <div><img src="/static/media/down-triangle.662edc78.svg"
+                                                    alt="">{{coin.market_cap}}%</div>
+                                        </span></div>
+                                    <div><span>24h </span><span>
+                                            <div><img src="/static/media/down-triangle.662edc78.svg"
+                                                    alt="">{{coin.price}}%
+                                            </div>
+                                        </span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% comment %} <div class="CoinView_coinAddress__2mNNC"><span><span>Binance Smart Chain: </span><span
+                                class="CoinView_coinAddressContract__DBDuW">0xa92b1cdc86fcfcac705332f717008e8745bb2da3</span></span><button
+                            class="CoinView_copyButton__25g9u"></button><span></span></div> {% endcomment %}
+                    <div class="CoinView_coinPrice__1REHb"><span><span>Market cap
+                                <span></span></span><span>${{coin.market_cap}}</span></span><span><span>Price
+                                <span></span></span>
+                            <span>${{coin.price}}</span></span><span><span>Launch <span></span></span>
+                            <span>{{coin.launch_date}}</span></span></div>
+                    <div class="CoinView_coinDescription__2_Ass">
+                        <p>💰 Welcome to SHARKCAKE 💰</p>
+                        <p></p>
+                        <p>🦈🎂 SharkCake is the first token on BSC to GUARANTEE DOUBLE CAKE REFLECTIONS to investors!
+                        </p>
+                        <p></p>
+                        <p>🔥 CAKE’s Reflection works alongside SharkCake’s Reflection, generating between 5x-10x
+                            profits compared to only holding CAKE*</p>
+                        <p>🔥 SharkShot: auto and manual buyback to eat dips (tokens burnt)</p>
+                        <p>🔥 Expert team and Community to back it</p>
+                        <p></p>
+                        <p>💸 SHARKCAKE LOTTERY &amp; NFT GAME EARN CAKE in the WORKS!</p>
+                        <p></p>
+                        <p>⭐️VIEW MORE OF OUR AMAZING TOKENOMICS AT https://sharkcake.finance</p>
+                        <p>⭐️TWITTER: https://twitter.com/SharkCakeBSc</p>
+                        <p></p>
+                        <p>⭐️Feeling early? Join the SHARKCAKE ARMY on our pre-sale AUGUST 14th at
+                            https://launchpad.sharkcake.finance</p>
+                    </div>
+                </div>
+
+                <div class="CoinView_coinVotes__3W4f6"><span>
+                        {% if user.is_authenticated %}
+                        {% if request.session.Utype == "user" %}
+
+                        {% endif %}
+                        {% if coinvote  %}
+                        {% if coinvote.user == user %}
+                        <button
+                            class="UpvoteButton_UpvoteButton__2emOP UpvoteButton_upvoted__2x7eD UpvoteButton_large__XD9Yg"><span>🚀</span>VOTED!</button>
+                        
+                        {% else %}
+                        <form action="" method="POST"> {% csrf_token %}
+                            <button type="vote" name="vote"
+                                class="UpvoteButton_UpvoteButton__2emOP false UpvoteButton_large__XD9Yg"><span>🚀</span>VOTE</button></span></form>
+                    
+                        {% endif %}
+                        {% else %}
+                        <form action="" method="POST"> {% csrf_token %}
+                            <button type="vote" name="vote"
+                                class="UpvoteButton_UpvoteButton__2emOP false UpvoteButton_large__XD9Yg"><span>🚀</span>VOTE</button></span></form>
+                    
+                        
+
+                    {% endif %}
+                    {% else %}
+                    <form action="/login">
+                        <button
+                            class="UpvoteButton_UpvoteButton__2emOP false UpvoteButton_large__XD9Yg"><span>🚀</span>VOTE</button></span>
+                    </form>
+
+                    {% endif %}
+                    <div class="CoinView_coinVoteText__1ASRi">You can vote once every 24 hours</div>
+                </div>
+            </section>
+        </section>
+    </div>
+</section>
+
+
+
+
+
+
+
+{% endblock body %}

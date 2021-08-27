@@ -4,6 +4,19 @@
 {% block body %}
 {% load static %}
 
+
+
+  {% if user.is_authenticated %}
+  {% comment %} {% if request.session.Utype == "user" %}
+  {% else %}
+  <script>location.replace("/")</script>
+  {% endif %} {% endcomment %}
+  {% else %}
+  <script>location.replace("/")</script>
+  {% endif %}
+
+
+
 {% comment %} <section id="hero" class="d-flex align-items-center">
 
     <div class="container" data-aos="zoom-out" data-aos-delay="100">
@@ -40,7 +53,70 @@
         <section><a class="App_goBackLink__3AM8g" href="/">Back
                 To Main</a>
             <section>
+            {% if coin %}
                 <form class="AddCoinForm_AddCoinForm__13uq-" method="POST">
+                        {% csrf_token %}
+                    <div class="AddCoinForm_columns__2a0Ki">
+                        <div>
+                            <h3>Coin info </h3>
+                            <div class="AddCoinForm_formGroup__1kxWq"><label for="name">Name</label><span
+                                    class="AddCoinForm_required__2V4xi">Required</span><input value="{{coin.coin_name}}" placeholder="e.g. Bitcoin"
+                                    name="name" required></div>
+                            <div class="AddCoinForm_formGroup__1kxWq"><label for="symbol">Symbol</label><span
+                                    class="AddCoinForm_required__2V4xi">Required</span><input  value="{{coin.coin_symbol}}" placeholder="e.g. BTC"
+                                    name="symbol" required></div>
+                            <div class="AddCoinForm_formGroup__1kxWq"><label for="description">Description</label><span
+                                    class="AddCoinForm_required__2V4xi">Required</span><textarea 
+                                    placeholder="e.g. Bitcoin is a decentralized digital currency"
+                                    name="description" required> {{coin.coin_discription}}</textarea></div>
+                            <div class="AddCoinForm_formGroup__1kxWq"><label for="marketCap">Market Cap in
+                                    USD</label><input value="{{coin.market_cap}}" placeholder="e.g. 150000" name="marketCap" required></div>
+                            <div class="AddCoinForm_formGroup__1kxWq"><label for="price">Price in USD</label><input value="{{coin.price}}"
+                                    placeholder="e.g. 0.006" name="price"    required></div>
+                            <div class="AddCoinForm_formGroup__1kxWq"><label for="price">Class Type</label><select style="
+                                background-color: #232a32;
+                                border-radius: .3rem;
+                                padding: .4rem 1rem;
+                                width: 100%;
+                                color: #fff;
+                                font-size: 1.4rem;
+                                outline: 2px solid #9488f0;
+                                height: 4rem;
+                            " name="classtype" id="ddl">
+                                    <option  value="">Today Hots</option>
+                            </select></div>
+
+                                      {% comment %} <div class="AddCoinForm_formGroup__1kxWq"><label for="launchDate">Launch date
+                                    (YYYY-MM-DD)</label><span class="AddCoinForm_required__2V4xi">Required</span><input value="{{coin.launch_date}}"
+                                    placeholder="e.g. 2021-01-28" name="launchDate" type="date" required></div> {% endcomment %}
+                            
+                        </div>
+                        <div>
+                            <h3>Links</h3>
+                            <div class="AddCoinForm_formGroup__1kxWq"><label for="website">Website</label><input value="{{coin.website}}"
+                                    placeholder="e.g. www.example.com" name="website"></div>
+                            <div class="AddCoinForm_formGroup__1kxWq"><label for="telegram">Telegram</label><span
+                                    class="AddCoinForm_required__2V4xi">Required</span><input value="{{coin.telegram}}"
+                                    placeholder="e.g. https://t.me/bitcoin" name="telegram"></div>
+                            <div class="AddCoinForm_formGroup__1kxWq"><label for="twitter">Twitter</label><input  value="{{coin.twitter}}"
+                                    placeholder="e.g. https://twitter.com/bitcoin" name="twitter"></div>
+                            <div class="AddCoinForm_formGroup__1kxWq"><label for="discord">Discord</label><input value="{{coin.discord}}"
+                                    placeholder="e.g. https://discord.gg/46URkm" name="discord"></div>
+                            <div class="AddCoinForm_formGroup__1kxWq"><label for="reddit">Reddit</label><input value="{{coin.reddit}}"
+                                    placeholder="e.g. https://www.reddit.com/r/bitcoin/" name="reddit"></div>
+                            <div class="AddCoinForm_formGroup__1kxWq"><label for="logo">Logo</label><span
+                                    class="AddCoinForm_required__2V4xi">Required</span><input value="{{coin.logo}}"
+                                    placeholder="e.g. https://i.ibb.co/logo.png" name="logo"></div>
+                            <div class="AddCoinForm_formGroup__1kxWq"><label for="contractAddress">Additional
+                                    information, other links and addresses</label><textarea
+                                    name="additionalInfo">{{coin.additional_info}}</textarea></div>
+                            
+                        </div>
+                    </div>
+                    <div class="AddCoinForm_formButtons__1O5-q"><button type="submit">Update Coin</button></div>
+                </form>
+                {% else %}
+                 <form class="AddCoinForm_AddCoinForm__13uq-" method="POST">
                         {% csrf_token %}
                     <div class="AddCoinForm_columns__2a0Ki">
                         <div>
@@ -88,6 +164,7 @@
                     </div>
                     <div class="AddCoinForm_formButtons__1O5-q"><button type="submit">Add Coin</button></div>
                 </form>
+                {% endif %}
             </section>
         </section>
 

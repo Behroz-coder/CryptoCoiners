@@ -2,7 +2,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render , HttpResponse
 from django.contrib.auth  import authenticate,  login, logout
 from django.contrib.auth.models import User
-from cryptocoinersite.models import Extend , Coin
+from cryptocoinersite.models import Extend , Coin , CoinVoter
 from django.contrib import messages
 import re
 from django.shortcuts import redirect, HttpResponseRedirect
@@ -13,10 +13,92 @@ from django.shortcuts import redirect, HttpResponseRedirect
 # Create your views here.
 def index(index):
     allcoin = Coin.objects.all()
-    return render(index, 'cryptocoinersite/home.html' , {'allcoin':allcoin})
+    coinvote=''
+    if(index.user.username ): 
+        # print('d',index.user.id) 
+        user = User.objects.get(username=index.user.username)
+        coinvote = CoinVoter.objects.filter(user=user)
+        # join = Coin.objects.annotate(j=CoinVoter()) 
+        # print(join)
+        # print(allcoin)
+    return render(index, 'cryptocoinersite/home.html' , {'allcoin':allcoin,'coinvote':coinvote}) 
+    
+def new(index):
+    allcoin = Coin.objects.all()
+    coinvote=''
+    if(index.user.username ): 
+        # print('d',index.user.id) 
+        user = User.objects.get(username=index.user.username)
+        coinvote = CoinVoter.objects.filter(user=user)
+        # join = Coin.objects.annotate(j=CoinVoter()) 
+        # print(join)
+        # print(allcoin)
+    return render(index, 'cryptocoinersite/home.html' , {'allcoin':allcoin,'coinvote':coinvote}) 
+    
+def all(index):
+    allcoin = Coin.objects.all()
+    coinvote=''
+    if(index.user.username ): 
+        # print('d',index.user.id) 
+        user = User.objects.get(username=index.user.username)
+        coinvote = CoinVoter.objects.filter(user=user)
+        # join = Coin.objects.annotate(j=CoinVoter()) 
+        # print(join)
+        # print(allcoin)
+    return render(index, 'cryptocoinersite/home.html' , {'allcoin':allcoin,'coinvote':coinvote}) 
+    
+def presale(index):
+    allcoin = Coin.objects.all()
+    coinvote=''
+    if(index.user.username ): 
+        # print('d',index.user.id) 
+        user = User.objects.get(username=index.user.username)
+        coinvote = CoinVoter.objects.filter(user=user)
+        # join = Coin.objects.annotate(j=CoinVoter()) 
+        # print(join)
+        # print(allcoin)
+    return render(index, 'cryptocoinersite/home.html' , {'allcoin':allcoin,'coinvote':coinvote}) 
+    
+def myvote(request):
+    allcoin = Coin.objects.all()
+    coinvote=''
+    if(request.user.username ): 
+        # print('d',request.user.id) 
+        user = User.objects.get(username=request.user.username)
+        coinvote = CoinVoter.objects.filter(user=user)
+        # join = Coin.objects.annotate(j=CoinVoter()) 
+        # print(join)
+        # print(allcoin)
+    return render(request, 'cryptocoinersite/myvote.html' , {'allcoin':allcoin,'coinvote':coinvote}) 
     
 def disclaimer(request):
     return render(request, 'cryptocoinersite/disclaimer.html' )
+
+def promote(request):
+    return render(request, 'cryptocoinersite/promote.html' )
+
+def coin(request,id):
+    
+    coin = Coin.objects.get(id = id)
+    if request.method == "POST" and "vote" in request.POST:
+        user = User.objects.get(username=request.user.username)
+        
+        addvote = CoinVoter(user=user,coinid=coin)
+        addvote.save()
+        coin.vote = coin.vote + 1
+    #    print('vote = ',coin.vote)
+        coin.save()
+       
+    coinvote=''
+    if(request.user.username ): 
+        # print('d',request.user.id) 
+        user = User.objects.get(username=request.user.username)
+        if(CoinVoter.objects.filter(coinid=coin,user=user)):
+            coinvote = CoinVoter.objects.get(coinid=coin,user=user)
+        
+
+    
+    return render(request, 'cryptocoinersite/coinpage.html',{'coin':coin,'coinvote':coinvote} )
 
 def privacy(request):
     return render(request, 'cryptocoinersite/privacy.html' )
@@ -46,12 +128,6 @@ def addcoin(request):
         reddit = request.POST['reddit']
         logo = request.POST['logo']
         additionalInfo = request.POST['additionalInfo']
-        # question = request.POST['question']
-        # answer = request.POST['answer']
-        # timeddl = 1
-        # # Create the job
-        # user = User.objects.get(username=request.user.username)
-        # job = Jobs.objects.get(job_title=job_title)
        
         addcoin = Coin(coin_name = name, coin_symbol = symbol, coin_discription = description, 
         market_cap = marketCap, 

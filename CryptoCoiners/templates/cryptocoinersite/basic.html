@@ -11,16 +11,17 @@
     <meta content="" name="keywords">
     {% load static %}
     <!-- Favicons -->
+    {% comment %}
     <link href="{% static 'assets/img/siteicon1.png' %}" rel="icon">
-    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon"> {% endcomment %}
 
 
-    <!-- Google Fonts -->
+
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
 
-    <!-- Vendor CSS Files -->
+
     <link href="{%  static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
     <link href="{%  static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{%  static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
@@ -29,11 +30,14 @@
     <link href="{%  static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
     <link href="{%  static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
 
-    <!-- Template Main CSS File -->
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <link href="{%  static 'assets/css/style.css' %}" rel="stylesheet">
     <link href="{% static 'css/chunk.css' %}" rel="stylesheet">
     <link href="{% static 'css/chunk1.css' %}" rel="stylesheet">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         .emoji-picker-react ul.skin-tones-list {
             padding: 0;
@@ -401,106 +405,109 @@
 
 <body>
 
-    <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top d-flex align-items-center">
-        <div class="container d-flex align-items-center">
-            <h1 class="logo me-auto"><a href="/">CryptoCoiners<span>.</span></a></h1>
+    <div class="container">
+        <header id="header" class="fixed-top d-flex align-items-center">
+            <div class="container d-flex align-items-center">
+                <h1 class="logo me-auto"><a href="/">CryptoCoiners<span>.</span></a></h1>
 
 
-            <nav id="navbar" class="navbar order-last order-lg-0">
-                <ul>
-                    {% comment %} <li><a class="nav-link scrollto {% block tabhome %}{% endblock tabhome %}"
-                            href="/">Home</a></li> {% endcomment %}
-                    <li>
-                        <a class="nav-link scrollto {% block tabhome %}{% endblock tabhome %}" href="/addcoin">Add
-                            Coin</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                    {% if request.session.Utype == "user" %}
+                <nav id="navbar" class="navbar order-last order-lg-0">
+                    <ul>
+                        {% comment %} <li><a class="nav-link scrollto {% block tabhome %}{% endblock tabhome %}"
+                                href="/">Home</a></li> {% endcomment %}
+                        
+                       
+                        {% if user.is_authenticated %}
+                        {% if request.session.Utype == "user" %}
+                        {% comment %} <li>
+                            <a class="nav-link scrollto " href="/profile">Profile</a>
+                        </li> {% endcomment %}
                         <li>
-                        <a class="nav-link scrollto " href="/profile">Profile</a>
-                    </li>
+                            <a class="nav-link scrollto " href="/addcoin">Add
+                                Coin</a>
+                        </li>
+                         <li>
+                            <a class="nav-link scrollto " href="/promote">Promote Coin</a>
+                        </li>
                         <li>
-                        <a class="nav-link scrollto " href="/profile">My Vote</a>
-                    </li>
-                    </li>
+                            <a class="nav-link scrollto " href="/myvote">My Vote</a>
+                        </li>
+                        
+                        {% comment %} <li>
+                            <a class="nav-link scrollto " href="/profile">My Coin</a>
+                        </li> {% endcomment %}
+                        {% else %}
+                         <li>
+                            <a class="nav-link scrollto " href="/addcoin">Add
+                                Coin</a>
+                        </li>
                         <li>
-                        <a class="nav-link scrollto " href="/profile">My Coin</a>
-                    </li>
-                    {% else %}
-                     </li>
-                        <li>
-                        <a class="nav-link scrollto " href="/profile">Dashboard</a>
-                    </li>
-                    {% endif %}
-                    {% endif %}
-                    
-
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav>
+                            <a class="nav-link scrollto " href="/dashboard">Dashboard</a>
+                        </li>
+                        {% endif %}
+                        {% endif %}
 
 
-            <!-- .navbar -->
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav>
 
-            {% comment %} <a href="/schedule" class="get-started-btn scrollto">Schedule Interview</a> {% endcomment %}
-            {% comment %} <a href="/login" class="get-started-btn scrollto">Add Coin</a> {% endcomment %}
-             {% if user.is_authenticated %}
+
+
+
+                {% if user.is_authenticated %}
                 {% if request.session.Utype == "user" %}
-                    <a href="/logout" class="get-started-btn scrollto">Logout</a>
+                <a href="/logout" class="get-started-btn scrollto">Logout</a>
                 {% else %}
-                    <a href="/logout" class="get-started-btn scrollto">Logout</a>
+                <a href="/logout" class="get-started-btn scrollto">Logout</a>
                 {% endif %}
-            {% else %}
+                {% else %}
                 <a href="/login" class="get-started-btn scrollto">Login</a>
-            {% endif %}
-            
-        </div>
-    </header><!-- End Header -->
+                {% endif %}
+
+            </div>
+        </header>
 
 
 
 
-    {% block body %}
+        {% block body %}
 
 
-    {% endblock body %}
+        {% endblock body %}
 
 
-    <!-- ======= Footer ======= -->
-    <footer id="footer" style="margin-top: 60px;">
+  </div>
+        <footer id="footer" style="margin-top: 60px;">
 
 
 
-        <div class="container d-md-flex py-4" style="justify-content: center;">
+            <div class="container d-md-flex py-4" style="justify-content: center;">
 
-            <footer class="Footer_footer__2NNgL" style="justify-content: center;">
-                <div class="Footer_footerContent__23Ozm">
-                    <h1 class="Footer_footerPromote__lzI55"><a href="/">CryptoCoiners.</a></h1>
-                    <div class="Footer_footerLinks__2gEQf"><a href="/disclaimer">Disclaimer</a><a
-                            href="/privacy">Privacy Policy</a><a href="/terms">Terms &amp; Conditions</a></div>
-                    <div class="Footer_footerCopyRights__1glLI">CrypotoCoiners. © 2021 - contact@cryptocoiners.com</div>
-                </div>
-            </footer>
+                <footer class="Footer_footer__2NNgL" style="justify-content: center;">
+                    <div class="Footer_footerContent__23Ozm">
+                        <h1 class="Footer_footerPromote__lzI55"><a href="/">CryptoCoiners.</a></h1>
+                        <div class="Footer_footerLinks__2gEQf"><a href="/disclaimer">Disclaimer</a><a
+                                href="/privacy">Privacy Policy</a><a href="/terms">Terms &amp; Conditions</a></div>
+                        <div class="Footer_footerCopyRights__1glLI">CrypotoCoiners. © 2021 - contact@cryptocoiners.com
+                        </div>
+                    </div>
+                </footer>
 
-        </div>
-    </footer><!-- End Footer -->
-
+            </div>
+        </footer>
+  
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
-    <!-- Vendor JS Files -->
+
     <script src="{%  static 'assets/vendor/aos/aos.js' %}"></script>
     <script src="{%  static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{%  static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
     <script src="{%  static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
-    {% comment %}
-    <script src="{%  static 'assets/vendor/php-email-form/validate.js' %}"></script> {% endcomment %}
-    <script src="{%  static 'assets/vendor/purecounter/purecounter.js' %}"></script>
-    {% comment %}
-    <script src="{%  static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script> {% endcomment %}
 
-    <!-- Template Main JS File -->
+    <script src="{%  static 'assets/vendor/purecounter/purecounter.js' %}"></script>
+
     <script src="{%  static 'assets/js/main.js' %}"></script>
     {% block script %}{% endblock script %}
 </body>

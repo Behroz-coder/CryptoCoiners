@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="{% static 'cassets/img/favicon.png' %}">
+
+    <title>{% block title %} {% endblock title %}</title>
+
+
+    <link href="{% static 'cassets/css/bootstrap-theme.css' %}" rel="stylesheet">
+
+    <link href="{% static 'cassets/css/elegant-icons-style.css' %}" rel="stylesheet" />
+
+    <link href="{% static 'cassets/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'cassets/css/style-responsive.css' %}" rel="stylesheet" />
+
+
+
+
+
+    {% if user.is_authenticated %}
+    {% if request.session.Utype == "admin" %}
+    {% else %}
+    <script>
+        location.replace("/")
+    </script>
+    {% endif %}
+    {% else %}
+    <script>
+        location.replace("/")
+    </script>
+    {% endif %}
+
+
+
+
+</head>
+
+<body>
+
+    <section id="container" class="">
+
+
+        <header class="header dark-bg">
+            <div class="toggle-nav">
+                <div class="icon-reorder tooltips" data-original-title="" data-placement="bottom"><i
+                        class="icon_menu"></i>
+                </div>
+            </div>
+
+
+            <a href="/dashboard" class="logo">CryptoCoiners <span class="lite"></span></a>
+
+
+            <div class="top-nav notification-row">
+
+                <ul class="nav pull-right top-menu">
+                    <li>
+                        <a href="/" style="color:white;"> WebSite</a>
+                    </li>
+                    <li>
+                        <a href="/addcoin" style="color:white;"> Add Coin</a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="profile-ava">
+                                <img alt="" src="{% static 'cassets/img/profile.jpg' %}" width="30px" hight="30px">
+                            </span>
+                            <span class="username">{{request.user}}</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <div class="log-arrow-up"></div>
+                            {% comment %} <li class="eborder-top">
+                                <a href="/company/profile"><i class="icon_profile"></i> My Profile</a>
+                            </li> {% endcomment %}
+                            <li>
+                                <a href="/logout"><i class="icon_key_alt"></i> Log Out </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+
+            </div>
+        </header>
+
+
+
+        <aside>
+            <div id="sidebar" class="nav-collapse ">
+
+                <ul class="sidebar-menu">
+                    <li class="active">
+                        <a class="" href="/dashboard">
+                            <i class=""></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="" href="/allcoin">
+                            <i class=""></i>
+                            <span>All Coin's</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/newcoin">
+                            <i class=""></i>
+                            <span>New Added Coin</span>
+
+                        </a>
+
+                    </li>
+                    <li>
+                        <a class="" href="/promoted">
+                            <i class=""></i>
+                            <span>💎Promoted coins</span>
+
+                        </a>
+
+                    </li>
+                    <li>
+                        <a class="" href="/today">
+                            <i class=""></i>
+                            <span>🔥 Today‘s Hot</span>
+
+                        </a>
+
+                    </li>
+                    <li>
+                        <a class="" href="/new">
+                            <i class=""></i>
+                            <span>💙 New</span>
+
+                        </a>
+
+                    </li>
+                    <li>
+                        <a class="" href="/alltimebest">
+                            <i class=""></i>
+                            <span>🥇 All Time Best</span>
+
+                        </a>
+
+                    </li>
+                    <li>
+                        <a class="" href="/presal">
+                            <i class=""></i>
+                            <span>🎉 Presal</span>
+
+
+                        </a>
+
+                    </li>
+                    <li>
+                        <a class="" href="/users">
+                            <i class=""></i>
+                            <span>User's</span>
+
+                        </a>
+
+                    </li>
+                    <li>
+                        <a class="" href="/users">
+                            <i class=""></i>
+                            <span>Upvote User's</span>
+
+                        </a>
+
+                    </li>
+                    <li>
+                        <a class="" href="/adds">
+                            <i class=""></i>
+                            <span>Banner's</span>
+
+                        </a>
+
+                    </li>
+
+
+
+                </ul>
+
+            </div>
+        </aside>
+
+
+
+
+
+        {% block body %}
+
+
+        {% endblock body %}
+
+
+
+
+
+
+    </section>
+
+
+
+
+
+
+    <script src="{% static 'cassets/js/jquery-1.8.3.min.js' %}"></script>
+
+    <script src="{% static 'cassets/js/bootstrap.min.js' %}"></script>
+
+
+
+    <script src="{% static 'cassets/js/scripts.js' %}"></script>
+
+    <script src="{% static 'cassets/js/jquery-jvectormap-1.2.2.min.js' %}"></script>
+
+
+
+</body>
+
+</html>

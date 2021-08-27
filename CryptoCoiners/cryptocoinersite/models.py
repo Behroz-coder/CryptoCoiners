@@ -12,12 +12,14 @@ class Extend(models.Model):
 class Coin(models.Model):
     id = models.AutoField(primary_key=True)
     # user = models.ForeignKey(User, on_delete=models.CASCADE ,null=True)
-    user = models.CharField(max_length=200)
+    user = models.CharField(max_length=20)
     coin_name = models.CharField(max_length=200)
     coin_symbol = models.CharField(max_length=200)
     coin_discription = models.CharField(max_length=800)
-    market_cap = models.IntegerField()
-    price = models.IntegerField(null=True)
+    market_cap = models.CharField(max_length=200)
+    h1 = models.CharField(max_length=200)
+    h24 = models.CharField(max_length=200)
+    price = models.CharField(max_length=200)
     launch_date = models.DateField((""), auto_now=False, auto_now_add=False)
   
     website = models.CharField(max_length=200)
@@ -35,5 +37,27 @@ class Coin(models.Model):
     
     def __str__(self):
         return "%s %s" % (self.coin_name, self.coin_symbol)
+
+class CoinVoter(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE ,null=True)
+    coinid = models.ForeignKey(Coin, on_delete=models.CASCADE ,null=True)
+    
+
+    post_date = models.DateTimeField(auto_now_add=True, blank=True)
+    coin_status =models.BooleanField(default=False)
+    
+    def __str__(self):
+        return "%s %s" % (self.user, self.coinid)
+
+
+class Banner(models.Model):
+    id = models.AutoField(primary_key=True)
+    image = models.CharField(max_length=200)
+    
+ 
+
+    def __str__(self):
+        return "%s" % (self.image)
 
 

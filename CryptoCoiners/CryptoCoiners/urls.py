@@ -19,7 +19,6 @@ from django.urls.conf import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('admin.urls')),
+    path('', include('adminsite.urls')),
     path('', include('cryptocoinersite.urls')),
-    path('', include('user.urls'))
 ]

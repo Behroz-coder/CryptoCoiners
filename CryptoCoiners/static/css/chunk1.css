@@ -1960,12 +1960,12 @@ textarea {
     flex-direction: column;
     -webkit-align-items: center;
     align-items: center;
-    max-width: 98vw;
-    width: 1530px;
+    /* max-width: 98vw; */
+    /* width: 1530px; */
     border-radius: 20px;
     padding: 50px 30px;
     text-align: left;
-    color: #fff
+    color: #fff;
 }
 
 .Promote_Promote__1Cjl->i {

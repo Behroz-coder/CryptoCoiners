@@ -38,10 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cryptocoinersite.apps.CryptocoinersiteConfig',
-    'user.apps.UserConfig',
+    'cryptocoinersite.apps.CryptocoinersiteConfig', 
+    'adminsite.apps.AdminsiteConfig',
 ]
-
+ 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

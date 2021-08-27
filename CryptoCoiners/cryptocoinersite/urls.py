@@ -12,4 +12,10 @@ urlpatterns = [
    path('disclaimer/', views.disclaimer, name='disclaimer'),
    path('privacy/', views.privacy, name='privacy'),
    path('terms/', views.terms, name='terms'),
+   path('promote/', views.promote, name='promote'),
+   path('coin/<int:id>', views.coin, name='coin'),
+   path('myvote/', views.myvote, name='myvote'),
+   path('new/', views.new, name='new'),
+   path('all/', views.all, name='all'),
+   path('presale/', views.presale, name='presale'),
 ]

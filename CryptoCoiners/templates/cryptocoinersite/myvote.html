@@ -1,0 +1,144 @@
+{% extends 'cryptocoinersite/basic.html' %}
+{% block title %} CryptoCoiners - My Voted Coin {% endblock title %}
+{% block tabhome %} active {% endblock tabhome %}
+{% block body %}
+{% load static %}
+
+  {% if user.is_authenticated %}
+  {% comment %} {% if request.session.Utype == "user" %}
+  {% else %}
+  <script>location.replace("/")</script>
+  {% endif %} {% endcomment %}
+  {% else %}
+  <script>location.replace("/")</script>
+  {% endif %}
+
+<section id="testimonials" class="testimonials">
+    <div class="container" data-aos="fade-up">
+        <section class="MainView_MainView__28hF8">
+            <section class="CoinList_CoinList__3jwUO">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><span>💎</span>Promoted coins</th>
+                            <th>Symbol</th>
+                            <th>1h</th>
+                            <th>Market Cap</th>
+                            <th>Launch</th>
+                            <th>Upvotes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for coin in coinvote  %}
+                        <tr onclick="myFunction(this)" id="{{coin.coinid.id}}">
+                            <td>
+                                <div class="CoinList_coinLogo__2FFG-">
+                                    <picture>
+                                        {% comment %}
+                                        <source srcset="/3212.webp?v=0" type="image/webp">
+                                        <source srcset="/3212.png?v=0" type="image/png"> {% endcomment %}
+                                        <img src="" alt=""></picture>{{coin.coinid.coin_name}}
+                                </div>
+                            </td>
+                            <td>{{coin.coinid.coin_symbol}}</td>
+                            <td class="CoinList_priceComparison__3yaqb">
+                                <div><img src="" alt="">{{coin.coinid.price}}%</div>
+                            </td>
+                            <td>${{coin.coinid.market_cap}}</td>
+                            <td>{{coin.coinid.launch_date}}</td>
+                            <td>
+
+                                
+                                <div id="btn{{coin.coinid.id}}">
+                                    <button
+                                        class="UpvoteButton_UpvoteButton__2emOP false UpvoteButton_small__3vQ9d"><span>🚀</span>{{coin.coinid.vote}}</button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+            <div class="MainView_tableTabs__KLJD-"><button class="MainView_active__3R8g3">🔥 Today<span>'s
+                        Hot</span></button><button class="">💙 New</button><button class="">🥇 All Time<span>
+                        Best</span></button><button class="">🎉 Presale</button>
+                <div class="MainView_tableSearch__2kG1e"><img src="" alt=""><input placeholder="Search.." value="">
+                </div>
+                <div class="MainView_tableVoteText__1UJ7e">Coins can be upvoted every 24h</div>
+            </div>
+            <section class="CoinList_CoinList__3jwUO">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><span></span>Asset</th>
+                            <th>Symbol</th>
+                            <th>1h</th>
+                            <th>Market Cap</th>
+                            <th>Launch</th>
+                            <th>Upvotes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for coin in allcoin  %}
+                        <tr>
+                            <td>
+                                <div class="CoinList_coinLogo__2FFG-">
+                                    {% comment %} <picture>
+                                        <source
+                                            srcset="https://imgurupload.org/files/6984BA34-35F9-4E89-A00C-E0E40309155C.jpeg"
+                                            type="image/webp">
+                                        <source
+                                            srcset="https://imgurupload.org/files/6984BA34-35F9-4E89-A00C-E0E40309155C.jpeg"
+                                            type="image/png"><img
+                                            src="https://imgurupload.org/files/6984BA34-35F9-4E89-A00C-E0E40309155C.jpeg"
+                                            alt=""></picture> {% endcomment %}
+                                    {{coin.coin_name}}
+                                </div>
+                            </td>
+                            <td>{{coin.coin_symbol}}</td>
+                            <td class="CoinList_priceComparison__3yaqb">
+                                <div><img src="" alt="">{{coin.price}}%</div>
+                            </td>
+                            <td>${{coin.market_cap}}</td>
+                            <td>{{coin.launch_date}}</td>
+                            <td><button
+                                    class="UpvoteButton_UpvoteButton__2emOP false UpvoteButton_small__3vQ9d"><span>🚀</span>{{coin.vote}}</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button class="CoinList_showMoreButton__38tgO"><img src="" alt="">Show More</button>
+            </section>
+        </section>
+
+
+
+    </div>
+</section>
+
+
+
+
+
+
+
+{% endblock body %}
+{% block script %}
+<script>
+    function myFunction(x) {
+        location.replace("/coin/" + x.id)
+    }
+
+    function voter() {
+        {% for vote in coinvote %}
+
+        document.getElementById('btn{{vote.coinid.id}}').innerHTML ='<button class="UpvoteButton_UpvoteButton__2emOP UpvoteButton_upvoted__2x7eD UpvoteButton_small__3vQ9d"><span>🚀</span>{{vote.coinid.vote}}</button>' {% endfor %}
+
+
+    }
+    voter();
+</script>
+
+{% endblock script %}
