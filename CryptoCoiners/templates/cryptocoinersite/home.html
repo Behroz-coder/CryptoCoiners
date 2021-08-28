@@ -18,7 +18,7 @@ Home {% endblock title %} {% block tabhome %} active {% endblock tabhome %}
                         </tr>
                     </thead>
                     <tbody>
-                        {% for coin in allcoin %}
+                        {% for coin in promote %}
                         <tr onclick="myFunction(this)" id="{{coin.id}}">
                             <td>
                                 <div class="CoinList_coinLogo__2FFG-">
@@ -80,8 +80,8 @@ Home {% endblock title %} {% block tabhome %} active {% endblock tabhome %}
                         </tr>
                     </thead>
                     <tbody>
-                        {% for coin in allcoin %}
-                        <tr>
+                        {% for coin in coins %}
+                        <tr onclick="myFunction(this)" id="{{coin.id}}">
                             <td>
                                 <div class="CoinList_coinLogo__2FFG-">
                                     {% comment %}
@@ -105,22 +105,27 @@ Home {% endblock title %} {% block tabhome %} active {% endblock tabhome %}
                             </td>
                             <td>${{coin.market_cap}}</td>
                             <td>{{coin.launch_date}}</td>
-                            <td>
-                                <button class="
+                            <td> 
+                            <div id="btn{{coin.id}}">
+                                <button  class="
                     UpvoteButton_UpvoteButton__2emOP
                     false
                     UpvoteButton_small__3vQ9d
                   ">
                                     <span>🚀</span>{{coin.vote}}
                                 </button>
+                                </div>
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
-                <button class="CoinList_showMoreButton__38tgO">
+                {% comment %} <button class="CoinList_showMoreButton__38tgO">
                     <img src="" alt="" />Show More
-                </button>
+                </button> {% endcomment %}
+                <!-- {% for vote in coinvote  %}
+                {{vote.coinid.id}}
+                {% endfor %} -->
             </section>
         </section>
     </div>
@@ -136,9 +141,15 @@ Home {% endblock title %} {% block tabhome %} active {% endblock tabhome %}
     function voter() {
         
         {% for vote in coinvote %}
+        //alert('{{vote.coinid.id}}');
+        //alert(document.getElementById('btn{{vote.coinid.id}}'));
+//alert(vote.coinid.id);
 
-        document.getElementById('btn{{vote.coinid.id}}').innerHTML =
-            '<button class="UpvoteButton_UpvoteButton__2emOP UpvoteButton_upvoted__2x7eD UpvoteButton_small__3vQ9d"><span>🚀</span>{{vote.coinid.vote}}</button>' {% endfor %}
+if(document.getElementById('btn{{vote.coinid.id}}')){
+            document.getElementById('btn{{vote.coinid.id}}').innerHTML ='<button class="UpvoteButton_UpvoteButton__2emOP UpvoteButton_upvoted__2x7eD UpvoteButton_small__3vQ9d"><span>🚀</span>{{vote.coinid.vote}}</button>' 
+
+}
+        {% endfor %}
 
 
     }

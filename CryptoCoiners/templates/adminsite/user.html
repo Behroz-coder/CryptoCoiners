@@ -61,14 +61,14 @@
                 <td>{{user.user.email}}</td>
                 <td>
                   <div class="">
-                    {% comment %} <a class="btn btn-primary" href="{% url 'edit' coin.id %}">Edit</a>
-                    {% if jobs.job_status %}
-                    <a class="btn btn-success" href="{% url 'active' coin.id %}">Active</a>
+                    {% comment %} <a class="btn btn-primary" href="{% url 'edit' user.id %}">Edit</a>
+                    {% if user.user_status %}
+                    <a class="btn btn-success" href="{% url 'active' user.id %}">Active</a>
                     {% else %}
-                    <a class="btn btn-danger" href="{% url 'deactive' coin.id %}">Deactive</a>
-                    {% endif %}
+                    <a class="btn btn-danger" href="{% url 'deactive' user.id %}">Deactive</a>
+                    {% endif %}{% endcomment %}
 
-                    <a class="btn btn-danger" href="{% url 'delete' coin.id %}">Delete</a> {% endcomment %}
+                    <a class="btn btn-danger" href="{% url 'udelete' user.user.id %}">Delete</a> 
                   </div>
                 </td>
               </tr>

@@ -12,7 +12,8 @@ from django.shortcuts import redirect, HttpResponseRedirect
 
 # Create your views here.
 def index(index):
-    allcoin = Coin.objects.all()
+    promote = Coin.objects.filter(class_type='promoted')
+    todayhot = Coin.objects.filter(class_type='todayhot')
     coinvote=''
     if(index.user.username ): 
         # print('d',index.user.id) 
@@ -21,22 +22,24 @@ def index(index):
         # join = Coin.objects.annotate(j=CoinVoter()) 
         # print(join)
         # print(allcoin)
-    return render(index, 'cryptocoinersite/home.html' , {'allcoin':allcoin,'coinvote':coinvote}) 
+    return render(index, 'cryptocoinersite/home.html' , {'promote':promote,'coinvote':coinvote , 'coins':todayhot}) 
     
 def new(index):
-    allcoin = Coin.objects.all()
+    promote = Coin.objects.filter(class_type='promoted')
+    new = Coin.objects.filter(class_type='new')
     coinvote=''
     if(index.user.username ): 
         # print('d',index.user.id) 
         user = User.objects.get(username=index.user.username)
         coinvote = CoinVoter.objects.filter(user=user)
         # join = Coin.objects.annotate(j=CoinVoter()) 
-        # print(join)
+        print(coinvote) 
         # print(allcoin)
-    return render(index, 'cryptocoinersite/home.html' , {'allcoin':allcoin,'coinvote':coinvote}) 
+    return render(index, 'cryptocoinersite/home.html' , {'promote':promote,'coinvote':coinvote , 'coins':new}) 
     
 def all(index):
-    allcoin = Coin.objects.all()
+    promote = Coin.objects.filter(class_type='promoted')
+    alltimebest = Coin.objects.filter(class_type='alltimebest')
     coinvote=''
     if(index.user.username ): 
         # print('d',index.user.id) 
@@ -45,10 +48,11 @@ def all(index):
         # join = Coin.objects.annotate(j=CoinVoter()) 
         # print(join)
         # print(allcoin)
-    return render(index, 'cryptocoinersite/home.html' , {'allcoin':allcoin,'coinvote':coinvote}) 
+    return render(index, 'cryptocoinersite/home.html' , {'promote':promote,'coinvote':coinvote , 'coins':alltimebest}) 
     
 def presale(index):
-    allcoin = Coin.objects.all()
+    promote = Coin.objects.filter(class_type='promoted')
+    presale = Coin.objects.filter(class_type='presale')
     coinvote=''
     if(index.user.username ): 
         # print('d',index.user.id) 
@@ -57,7 +61,7 @@ def presale(index):
         # join = Coin.objects.annotate(j=CoinVoter()) 
         # print(join)
         # print(allcoin)
-    return render(index, 'cryptocoinersite/home.html' , {'allcoin':allcoin,'coinvote':coinvote}) 
+    return render(index, 'cryptocoinersite/home.html' , {'promote':promote,'coinvote':coinvote , 'coins':presale}) 
     
 def myvote(request):
     allcoin = Coin.objects.all()
@@ -142,6 +146,7 @@ def addcoin(request):
         additional_info = additionalInfo,
         vote = 0,
         user = user,
+        class_type = 'none',
         
         
         )

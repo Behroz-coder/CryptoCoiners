@@ -82,8 +82,18 @@
                                 font-size: 1.4rem;
                                 outline: 2px solid #9488f0;
                                 height: 4rem;
-                            " name="classtype" id="ddl">
-                                    <option  value="">Today Hots</option>
+                            " name="ddl" id="ddl">
+                            
+                            
+                            
+
+                                 <option  value="none">Please select class type.</option> 
+
+                                    <option id="promoted" value="promoted">💎Promoted coins</option>
+                                    <option id="todayhot" value="todayhot">🔥 Today's Hot</option>
+                                    <option id="new" value="new">💙 New</option>
+                                    <option id="alltimebest" value="alltimebest">🥇 All Time Best</option>
+                                    <option id="presale" value="presale">🎉 Presale</option>
                             </select></div>
 
                                       {% comment %} <div class="AddCoinForm_formGroup__1kxWq"><label for="launchDate">Launch date
@@ -178,3 +188,13 @@
 
 
 {% endblock body %}
+
+{% block script %}
+<script>
+if('{{coin.class_type}}' != 'none'){
+        // alert('{{coin.class_type}}');
+        // document.getElementById('{{coin.class_type}}').setAttribute('selected');
+        document.getElementById('ddl').getElementsByTagName('option')['{{coin.class_type}}'].selected = 'selected'
+}
+</script>
+{% endblock script %}

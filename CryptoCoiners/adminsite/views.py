@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render,HttpResponseRedirect,redirect
 from cryptocoinersite.models import Coin,Extend,CoinVoter,Banner
 from django.contrib import messages
@@ -7,6 +8,23 @@ def dashboard(request):
 def allcoin(request):
     allcoin = Coin.objects.all()
     return render(request, 'adminsite/coin.html'  ,{'allcoin':allcoin})
+def promoted(request):
+    allcoin = Coin.objects.filter(class_type='promoted')
+    return render(request, 'adminsite/coin.html'  ,{'allcoin':allcoin})
+def today(request):
+    allcoin = Coin.objects.filter(class_type='todayhot')
+    return render(request, 'adminsite/coin.html'  ,{'allcoin':allcoin})
+def newcoins(request):
+    allcoin = Coin.objects.filter(class_type='new')
+    return render(request, 'adminsite/coin.html'  ,{'allcoin':allcoin})
+def alltimebest(request):
+    allcoin = Coin.objects.filter(class_type='alltimebest')
+    return render(request, 'adminsite/coin.html'  ,{'allcoin':allcoin})
+def presal(request):
+    allcoin = Coin.objects.filter(class_type='presale')
+    return render(request, 'adminsite/coin.html'  ,{'allcoin':allcoin})
+
+
 def newcoin(request):
     allcoin = Coin.objects.filter(coin_status=False)
     return render(request, 'adminsite/coin.html'  ,{'allcoin':allcoin})
@@ -33,11 +51,49 @@ def delete(request, id):
     coin.delete()
     messages.success(request, "Your coin is deleted successfully.")
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+def udelete(request, id):
+    user = User.objects.get(id=id)
+    user.delete()
+    messages.success(request, "User is deleted successfully.")
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 def update(request, id):
     if request.method == "POST":
+        coin = Coin.objects.get(id=id)
+
         # Get the post parameters
-        # job_title = request.POST['job_title']
+        name = request.POST['name']
+        symbol = request.POST['symbol']
+        description = request.POST['description']
+        marketCap = request.POST['marketCap']
+        price = request.POST['price']
+        # launchDate = request.POST['launchDate']
+        website = request.POST['website']
+        telegram = request.POST['telegram']
+        twitter = request.POST['twitter']
+        discord = request.POST['discord']
+        reddit = request.POST['reddit']
+        logo = request.POST['logo']
+        additionalInfo = request.POST['additionalInfo']
+        classtype = request.POST['ddl']
+
+
+        coin.coin_name = name
+        coin.coin_symbol = symbol
+        coin.coin_discription = description
+        coin.market_cap = marketCap
+        coin.price = price
+        coin.website = website
+        coin.telegram = telegram
+        coin.twitter = twitter
+        coin.discord = discord
+        coin.reddit = reddit
+        coin.logo = logo
+        coin.additional_info = additionalInfo 
+        coin.class_type = classtype
+       
+        coin.save()
+
         # job_discription = request.POST['job_discription']
         
         # # Create the job
@@ -45,9 +101,9 @@ def update(request, id):
         # ujob.job_title = job_title
         # ujob.job_discription = job_discription
         # ujob.save()
-        print('ok')
+        # print('dd= ',classtype)
         
-        # messages.success(request, "Your job is updated successfully.")
+        messages.success(request, "Your Coin is updated successfully.")
         return redirect('/allcoin')
         #return render(request, 'company/jobs.html')
         # return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
