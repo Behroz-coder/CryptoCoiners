@@ -18,4 +18,6 @@ urlpatterns = [
    path('new/', views.new, name='new'),
    path('all/', views.all, name='all'),
    path('presale/', views.presale, name='presale'),
+   path('upload/', views.upload, name='upload'),
+   
 ]

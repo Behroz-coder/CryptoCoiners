@@ -1,19 +1,91 @@
+from django.http import request, response
 from django.http.response import HttpResponse
 from django.shortcuts import render , HttpResponse
 from django.contrib.auth  import authenticate,  login, logout
 from django.contrib.auth.models import User
-from cryptocoinersite.models import Extend , Coin , CoinVoter
+from cryptocoinersite.models import Extend , Coin , CoinVoter, Banner
 from django.contrib import messages
 import re
+import requests
+import json
 from django.shortcuts import redirect, HttpResponseRedirect
+from pycoingecko import CoinGeckoAPI
+from django.core.files.storage import FileSystemStorage
 
 
+def upload(request):
+    if request.method == 'POST' and request.FILES['upload']:
+        upload = request.FILES['upload']
+        fss = FileSystemStorage()
+        addimage= Banner(image=upload)
+        addimage.save()
+        print(upload)
+        # file = fss.save(upload.name, upload)
+        # file_url = fss.url(file)
+        return redirect('/adds')
+    return render(request, 'adminsite/upload.html')
 
 
 # Create your views here.
 def index(index):
     promote = Coin.objects.filter(class_type='promoted')
     todayhot = Coin.objects.filter(class_type='todayhot')
+    banners = Banner.objects.all()
+    id = 'litecoin'
+    te='' 
+    # t = requests.get("https://api.coingecko.com/api/v3/coins/"+id+"?tickers=true&market_data=true&community_data=true&developer_data=true&sparkline=true").text
+    # te = json.loads(t)
+    # if(not t['error']):
+    #     print(t)
+    # print(t['error'])
+    coin_id=''
+    coin_name=''
+    coin_symbol=''
+    coin_dis=''
+    market_cap=''
+    price=''
+    h1=''
+    h24=''
+    launch_date=''
+    image=''
+
+    # if('error' in te):
+    #     print('coin not found')
+    # else:
+    #     pass 
+        # coin_id = te['id']
+        # coin_name = te['name']
+        # coin_symbol = te['symbol']
+        # coin_dis = te['description']['en']
+        # price = te['market_data']['current_price']['usd']
+        # market_cap = te['market_data']['market_cap']['usd']
+        # h1 = te['market_data']['price_change_percentage_1h_in_currency']['usd']
+        # h24 = te['market_data']['price_change_percentage_24h']
+        # image = te['image']['large']
+        # # print(h24) 
+        # addcoin = Coin(coin_id=coin_id,
+        # coin_name=coin_name,
+        # coin_symbol=coin_symbol,
+        # coin_dis=coin_dis,
+        # price=price,
+        # market_cap=market_cap,
+        # h1=h1,
+        # h24=h24,
+        # image=image,
+        # launch_date='2021-08-21'
+        # )
+        # addcoin.save()
+    # print(te)
+    # response = cg.get_price(ids='cardano', vs_currencies='usd' , include_24hr_change=True)
+    # res = json.loads(response)
+    # val = response['cardano']
+    # # print(val['usd_24h_change']) 
+    # for key, value in response.items():
+    #     for k,v in value.items():
+    #         # v = v/24
+    #         pass
+    #         # print(k,v)
+    # print(val)
     coinvote=''
     if(index.user.username ): 
         # print('d',index.user.id) 
@@ -22,7 +94,7 @@ def index(index):
         # join = Coin.objects.annotate(j=CoinVoter()) 
         # print(join)
         # print(allcoin)
-    return render(index, 'cryptocoinersite/home.html' , {'promote':promote,'coinvote':coinvote , 'coins':todayhot}) 
+    return render(index, 'cryptocoinersite/home.html' , {'promote':promote,'coinvote':coinvote , 'coins':todayhot ,'banners':banners}) 
     
 def new(index):
     promote = Coin.objects.filter(class_type='promoted')
@@ -133,7 +205,9 @@ def addcoin(request):
         logo = request.POST['logo']
         additionalInfo = request.POST['additionalInfo']
        
-        addcoin = Coin(coin_name = name, coin_symbol = symbol, coin_discription = description, 
+        addcoin = Coin(coin_name = name, 
+        coin_symbol = symbol, 
+        coin_discription = description, 
         market_cap = marketCap, 
         price = price,
         launch_date = launchDate,

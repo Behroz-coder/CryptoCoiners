@@ -3,6 +3,8 @@
 {% block tabhome %} active {% endblock tabhome %}
 {% block body %}
 {% load static %}
+{% load humanize %}
+
 
 
 <section id="testimonials" class="testimonials">
@@ -15,9 +17,8 @@
                 <div class="CoinView_mainPart__KVNG_">
                     <div class="CoinView_coinInfo__UjPde">
                         <picture>
-                            <source srcset="/3212.webp?v=0" type="image/webp">
-                            <source srcset="/3212.png?v=0" type="image/png"><img class="CoinView_coinLogo__1Y7ix"
-                                src="/3212.png?v=0" alt=""></picture>
+                            <img class="CoinView_coinLogo__1Y7ix"
+                                src="{{coin.image}}" alt=""></picture>
                         <div>
                             <h2 class="CoinView_coinName__7TUYw">{{coin.coin_name}}</h2>
                             <div class="CoinView_coinPanels__2GGkS"><span
@@ -26,17 +27,32 @@
                                     <div><span>Votes </span><span>{{coin.vote}}</span></div>
                                     <div><span>Today </span><span>{{coin.vote}}</span></div>
                                 </div>
-                                {% comment %} <div class="CoinView_coinComparisons__2idI1">
+                                 <div class="CoinView_coinComparisons__2idI1">
                                     <div><span>1h </span><span>
-                                            <div><img src="/static/media/down-triangle.662edc78.svg"
-                                                    alt="">{{coin.market_cap}}%</div>
+                                            <div>
+                                            {% if coin.h1 > '0' %}
+                                            <img src="{% static 'img/up.svg' %}" alt="">
+                                            {% else %}
+                                            <img src="{% static 'img/down.svg' %}"
+                                                    alt="">
+
+                                            {% endif %}
+                                            {{coin.h1|floatformat:2}}%
+                                                </div>
                                         </span></div>
                                     <div><span>24h </span><span>
-                                            <div><img src="/static/media/down-triangle.662edc78.svg"
-                                                    alt="">{{coin.price}}%
+                                            <div>
+                                            {% if coin.h24 > '0' %}
+                                            <img src="{% static 'img/up.svg' %}" alt="">
+                                            {% else %}
+                                            <img src="{% static 'img/down.svg' %}"
+                                                    alt="">
+
+                                            {% endif %}
+                                            {{coin.h24|floatformat:2}}%
                                             </div>
                                         </span></div>
-                                </div> {% endcomment %}
+                                </div> 
                             </div>
                         </div>
                     </div>
@@ -44,12 +60,17 @@
                                 class="CoinView_coinAddressContract__DBDuW">0xa92b1cdc86fcfcac705332f717008e8745bb2da3</span></span><button
                             class="CoinView_copyButton__25g9u"></button><span></span></div> {% endcomment %}
                     <div class="CoinView_coinPrice__1REHb"><span><span>Market cap
-                                <span></span></span><span>${{coin.market_cap}}</span></span><span><span>Price
+                                <span></span></span><span>${{coin.market_cap|intcomma}}</span></span><span><span>Price
                                 <span></span></span>
-                            <span>${{coin.price}}</span></span><span><span>Launch <span></span></span>
+                            <span>${{coin.price|intcomma}}</span></span><span><span>Launch <span></span></span>
                             <span>{{coin.launch_date}}</span></span></div>
                     <div class="CoinView_coinDescription__2_Ass">
-                        <p>💰 Welcome to SHARKCAKE 💰</p>
+                   <div id="des">
+                   {% comment %} <pre>
+                   {{coin.coin_dis}}
+                   </pre> {% endcomment %}
+                   </div>
+                   <p>💰 Welcome to SHARKCAKE 💰</p>
                         <p></p>
                         <p>🦈🎂 SharkCake is the first token on BSC to GUARANTEE DOUBLE CAKE REFLECTIONS to investors!
                         </p>
@@ -65,7 +86,7 @@
                         <p>⭐️TWITTER: https://twitter.com/SharkCakeBSc</p>
                         <p></p>
                         <p>⭐️Feeling early? Join the SHARKCAKE ARMY on our pre-sale AUGUST 14th at
-                            https://launchpad.sharkcake.finance</p>
+                            https://launchpad.sharkcake.finance</p> 
                     </div>
                 </div>
 
@@ -111,7 +132,15 @@
 
 
 
+ <script>
+ {% comment %} var d = {{coin.coin_dis}};
+document.getElementById('des').innerHTML=d; {% endcomment %}
 
+{% comment %} var html = {{coin.coin_dis}};
+var div = document.createElement("div");
+div.innerHTML = html;
+alert(div.innerText); {% endcomment %}
+</script> 
 
 
 

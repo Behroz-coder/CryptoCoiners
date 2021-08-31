@@ -13,9 +13,11 @@ class Coin(models.Model):
     id = models.AutoField(primary_key=True)
     # user = models.ForeignKey(User, on_delete=models.CASCADE ,null=True)
     user = models.CharField(max_length=20)
+    coin_id = models.CharField(max_length=200)
     coin_name = models.CharField(max_length=200)
     coin_symbol = models.CharField(max_length=200)
     coin_discription = models.CharField(max_length=800)
+    coin_dis = models.CharField(max_length=800)
     market_cap = models.CharField(max_length=200)
     h1 = models.CharField(max_length=200)
     h24 = models.CharField(max_length=200)
@@ -29,7 +31,8 @@ class Coin(models.Model):
     reddit = models.CharField(max_length=200)
     logo = models.CharField(max_length=200)
     additional_info = models.CharField(max_length=800)
-    vote = models.IntegerField()
+    vote = models.IntegerField(default=0) 
+    image = models.CharField(max_length=900)
 
     post_date = models.DateTimeField(auto_now_add=True, blank=True)
     class_type = models.CharField(max_length= 100)
@@ -53,9 +56,10 @@ class CoinVoter(models.Model):
 
 class Banner(models.Model):
     id = models.AutoField(primary_key=True)
-    image = models.CharField(max_length=200)
+    image1 = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='img',default="")
     
- 
+   
 
     def __str__(self):
         return "%s" % (self.image)

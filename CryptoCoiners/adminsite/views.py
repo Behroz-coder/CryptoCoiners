@@ -56,6 +56,11 @@ def udelete(request, id):
     user.delete()
     messages.success(request, "User is deleted successfully.")
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+def deleteimage(request, id):
+    banner = Banner.objects.get(id=id)
+    banner.delete()
+    messages.success(request, "Banner is deleted successfully.")
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 def update(request, id):
     if request.method == "POST":

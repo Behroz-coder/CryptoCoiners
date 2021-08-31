@@ -1,9 +1,24 @@
 {% extends 'cryptocoinersite/basic.html' %} {% block title %} CryptoCoiners -
 Home {% endblock title %} {% block tabhome %} active {% endblock tabhome %}
 {%block body %} {% load static %}
+{% load humanize %}
 
 <section id="testimonials" class="testimonials">
     <div class="container" data-aos="fade-up">
+        <div style="
+    margin-top: 48px;
+    margin-left: 40px;
+" class=" HeaderMooners_HeaderMooners__2WxYR">
+{% for banner in  banners %}       
+<a class=" mt-4 HeaderMooners_headerMooner__PhOsr" target="_blank"
+                rel="noopener noreferrer nofollow" href="">
+                <img style="
+                    margin-bottom: 10px;
+                border-radius: 20px;" src="/media/{{banner.image}}"
+                    alt="mooner"></a>
+       {% endfor %}
+    </div>
+
         <section class="MainView_MainView__28hF8">
             <section class="CoinList_CoinList__3jwUO">
                 <table>
@@ -26,14 +41,23 @@ Home {% endblock title %} {% block tabhome %} active {% endblock tabhome %}
                                         {% comment %}
                                         <source srcset="/3212.webp?v=0" type="image/webp" />
                                         <source srcset="/3212.png?v=0" type="image/png" />
-                                        {% endcomment %} <img src="" alt="" /></picture>{{coin.coin_name}}
+                                        {% endcomment %} <img src="{{coin.image}}" alt="" /></picture>{{coin.coin_name}}
                                 </div>
                             </td>
                             <td>{{coin.coin_symbol}}</td>
                             <td class="CoinList_priceComparison__3yaqb">
-                                <div><img src="" alt="" />{{coin.price}}%</div>
+                                <div>
+                                    {% if coin.h1 > '0' %}
+                                    <img src="{% static 'img/up.svg' %}" alt="">
+                                    {% else %}
+                                    <img src="{% static 'img/down.svg' %}" alt="">
+
+                                    {% endif %}
+                                    <img src="" alt="" />
+
+                                    {{coin.h1|floatformat:2}}%</div>
                             </td>
-                            <td>${{coin.market_cap}}</td>
+                            <td>${{coin.market_cap|intcomma}}</td>
                             <td>{{coin.launch_date}}</td>
                             <td>
                                 <div id="btn{{coin.id}}">
@@ -53,10 +77,10 @@ Home {% endblock title %} {% block tabhome %} active {% endblock tabhome %}
             </section>
             <div class="MainView_tableTabs__KLJD-">
                 <button class="MainView_active__3R8g3 active">
-                    <a  href="/">🔥 Today<span>'s Hot</span></a></button><button class=""><a
-                         href="/new">💙 New</a></button><button class="">
-                    <a  href="/all">🥇 All Time<span> Best</span></a></button><button class="">
-                    <a  href="/presale">🎉 Presale</a>
+                    <a href="/">🔥 Today<span>'s Hot</span></a></button><button class=""><a href="/new">💙
+                        New</a></button><button class="">
+                    <a href="/all">🥇 All Time<span> Best</span></a></button><button class="">
+                    <a href="/presale">🎉 Presale</a>
                 </button>
                 <div class="MainView_tableSearch__2kG1e">
                     <img src="" alt="" /><input placeholder="Search.." value="" />
@@ -83,37 +107,39 @@ Home {% endblock title %} {% block tabhome %} active {% endblock tabhome %}
                         {% for coin in coins %}
                         <tr onclick="myFunction(this)" id="{{coin.id}}">
                             <td>
+
                                 <div class="CoinList_coinLogo__2FFG-">
-                                    {% comment %}
                                     <picture>
-                                        <source srcset="
-                        https://imgurupload.org/files/6984BA34-35F9-4E89-A00C-E0E40309155C.jpeg
-                      " type="image/webp" />
-                                        <source srcset="
-                        https://imgurupload.org/files/6984BA34-35F9-4E89-A00C-E0E40309155C.jpeg
-                      " type="image/png" />
-                                        <img src="https://imgurupload.org/files/6984BA34-35F9-4E89-A00C-E0E40309155C.jpeg"
-                                            alt="" /></picture>
-                                    {% endcomment %} 
-                                    
-                                    {{coin.coin_name}}
+                                        {% comment %}
+                                        <source srcset="/3212.webp?v=0" type="image/webp" />
+                                        <source srcset="/3212.png?v=0" type="image/png" />
+                                        {% endcomment %} <img src="{{coin.image}}" alt="" /></picture>{{coin.coin_name}}
                                 </div>
                             </td>
                             <td>{{coin.coin_symbol}}</td>
                             <td class="CoinList_priceComparison__3yaqb">
-                                <div><img src="" alt="" />{{coin.price}}%</div>
+                                <div>
+
+                                    {% if coin.h1 > '0' %}
+                                    <img src="{% static 'img/up.svg' %}" alt="">
+                                    {% else %}
+                                    <img src="{% static 'img/down.svg' %}" alt="">
+
+                                    {% endif %}
+
+                                    {{coin.h1|floatformat:2}}%</div>
                             </td>
-                            <td>${{coin.market_cap}}</td>
+                            <td>${{coin.market_cap|intcomma}}</td>
                             <td>{{coin.launch_date}}</td>
-                            <td> 
-                            <div id="btn{{coin.id}}">
-                                <button  class="
+                            <td>
+                                <div id="btn{{coin.id}}">
+                                    <button class="
                     UpvoteButton_UpvoteButton__2emOP
                     false
                     UpvoteButton_small__3vQ9d
                   ">
-                                    <span>🚀</span>{{coin.vote}}
-                                </button>
+                                        <span>🚀</span>{{coin.vote}}
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -139,17 +165,22 @@ Home {% endblock title %} {% block tabhome %} active {% endblock tabhome %}
     }
 
     function voter() {
-        
-        {% for vote in coinvote %}
+
+        {
+            %
+            for vote in coinvote %
+        }
         //alert('{{vote.coinid.id}}');
         //alert(document.getElementById('btn{{vote.coinid.id}}'));
-//alert(vote.coinid.id);
+        //alert(vote.coinid.id);
 
-if(document.getElementById('btn{{vote.coinid.id}}')){
-            document.getElementById('btn{{vote.coinid.id}}').innerHTML ='<button class="UpvoteButton_UpvoteButton__2emOP UpvoteButton_upvoted__2x7eD UpvoteButton_small__3vQ9d"><span>🚀</span>{{vote.coinid.vote}}</button>' 
+        if (document.getElementById('btn{{vote.coinid.id}}')) {
+            document.getElementById('btn{{vote.coinid.id}}').innerHTML =
+                '<button class="UpvoteButton_UpvoteButton__2emOP UpvoteButton_upvoted__2x7eD UpvoteButton_small__3vQ9d"><span>🚀</span>{{vote.coinid.vote}}</button>'
 
-}
-        {% endfor %}
+        } {
+            % endfor %
+        }
 
 
     }

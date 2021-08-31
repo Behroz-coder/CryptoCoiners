@@ -21,11 +21,11 @@
     {% endfor %}
     <div class="row">
       <div class="col-lg-12">
-        <h3 class="page-header"><i class="fa fa-table"></i> User's</h3>
+        <h3 class="page-header"><i class="fa fa-table"></i> Banner's</h3>
 
         <ol class="breadcrumb">
           <li><i class="fa fa-home"></i><a href="/dashboard">Dashboard</a></li>
-          <li><i class="fa fa-table"></i>User's</li>
+          <li><i class="fa fa-table"></i>Banner's</li>
 
         </ol>
       </div>
@@ -36,6 +36,9 @@
 
 
     <div class="row">
+        <div class="col-lg-12">
+            <a class="btn btn-primary" href="/upload">Add New banner's</a><br>
+          </div><br>
       {% comment %} <div class="col-lg-12">
         <a class="btn btn-primary" href="/company/jobs/add-job">Add New Job</a><br>
       </div><br> {% endcomment %}
@@ -58,7 +61,7 @@
 
               <tr>
                 <td>{{forloop.counter}}</td>
-                <td>{{banner.image}}</td>
+                <td><img height="100px" width="850px" src="/media/{{baner.image}}" alt=""></td>
                 <td>
                   <div class="">
                     {% comment %} <a class="btn btn-primary" href="{% url 'edit' coin.id %}">Edit</a>
@@ -66,9 +69,9 @@
                     <a class="btn btn-success" href="{% url 'active' coin.id %}">Active</a>
                     {% else %}
                     <a class="btn btn-danger" href="{% url 'deactive' coin.id %}">Deactive</a>
-                    {% endif %}
+                    {% endif %}{% endcomment %}
 
-                    <a class="btn btn-danger" href="{% url 'delete' coin.id %}">Delete</a> {% endcomment %}
+                    <a class="btn btn-danger" href="{% url 'deleteimage' baner.id %}">Delete</a> 
                   </div>
                 </td>
               </tr>
