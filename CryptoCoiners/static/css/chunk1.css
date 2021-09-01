@@ -471,7 +471,15 @@ textarea {
     .App_popupBanner__SJfht button {
         font-size: 24px
     }
+    .HeaderMooners_headerMooner__PhOsr img {
+        max-width: 98vw;
+        margin-top: .5rem;
+        border-radius: .5rem;
+    }
 }
+
+
+
 
 .Footer_footer__2NNgL {
     display: -webkit-flex;

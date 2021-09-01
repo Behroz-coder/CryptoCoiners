@@ -20,5 +20,5 @@ urlpatterns = [
    path('udelete/<int:id>', views.udelete,name='udelete'),
    path('update/<int:id>', views.update,name='update'),
    path('deleteimage/<int:id>', views.deleteimage, name='deleteimage'),
-  
+   
 ]

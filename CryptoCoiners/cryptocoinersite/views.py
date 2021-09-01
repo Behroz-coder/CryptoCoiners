@@ -28,64 +28,12 @@ def upload(request):
 
 # Create your views here.
 def index(index):
-    promote = Coin.objects.filter(class_type='promoted')
-    todayhot = Coin.objects.filter(class_type='todayhot')
+    promote = Coin.objects.filter(class_type='promoted',coin_status=True)
+    todayhot = Coin.objects.filter(class_type='todayhot',coin_status=True)
     banners = Banner.objects.all()
-    id = 'litecoin'
-    te='' 
-    # t = requests.get("https://api.coingecko.com/api/v3/coins/"+id+"?tickers=true&market_data=true&community_data=true&developer_data=true&sparkline=true").text
-    # te = json.loads(t)
-    # if(not t['error']):
-    #     print(t)
-    # print(t['error'])
-    coin_id=''
-    coin_name=''
-    coin_symbol=''
-    coin_dis=''
-    market_cap=''
-    price=''
-    h1=''
-    h24=''
-    launch_date=''
-    image=''
-
-    # if('error' in te):
-    #     print('coin not found')
-    # else:
-    #     pass 
-        # coin_id = te['id']
-        # coin_name = te['name']
-        # coin_symbol = te['symbol']
-        # coin_dis = te['description']['en']
-        # price = te['market_data']['current_price']['usd']
-        # market_cap = te['market_data']['market_cap']['usd']
-        # h1 = te['market_data']['price_change_percentage_1h_in_currency']['usd']
-        # h24 = te['market_data']['price_change_percentage_24h']
-        # image = te['image']['large']
-        # # print(h24) 
-        # addcoin = Coin(coin_id=coin_id,
-        # coin_name=coin_name,
-        # coin_symbol=coin_symbol,
-        # coin_dis=coin_dis,
-        # price=price,
-        # market_cap=market_cap,
-        # h1=h1,
-        # h24=h24,
-        # image=image,
-        # launch_date='2021-08-21'
-        # )
-        # addcoin.save()
-    # print(te)
-    # response = cg.get_price(ids='cardano', vs_currencies='usd' , include_24hr_change=True)
-    # res = json.loads(response)
-    # val = response['cardano']
-    # # print(val['usd_24h_change']) 
-    # for key, value in response.items():
-    #     for k,v in value.items():
-    #         # v = v/24
-    #         pass
-    #         # print(k,v)
-    # print(val)
+   
+    
+   
     coinvote=''
     if(index.user.username ): 
         # print('d',index.user.id) 
@@ -97,8 +45,9 @@ def index(index):
     return render(index, 'cryptocoinersite/home.html' , {'promote':promote,'coinvote':coinvote , 'coins':todayhot ,'banners':banners}) 
     
 def new(index):
-    promote = Coin.objects.filter(class_type='promoted')
-    new = Coin.objects.filter(class_type='new')
+    banners = Banner.objects.all()
+    promote = Coin.objects.filter(class_type='promoted',coin_status=True)
+    new = Coin.objects.filter( class_type='new',coin_status=True)
     coinvote=''
     if(index.user.username ): 
         # print('d',index.user.id) 
@@ -107,11 +56,12 @@ def new(index):
         # join = Coin.objects.annotate(j=CoinVoter()) 
         print(coinvote) 
         # print(allcoin)
-    return render(index, 'cryptocoinersite/home.html' , {'promote':promote,'coinvote':coinvote , 'coins':new}) 
+    return render(index, 'cryptocoinersite/home.html' , {'promote':promote,'coinvote':coinvote , 'coins':new,'banners':banners}) 
     
 def all(index):
-    promote = Coin.objects.filter(class_type='promoted')
-    alltimebest = Coin.objects.filter(class_type='alltimebest')
+    banners = Banner.objects.all()
+    promote = Coin.objects.filter(class_type='promoted',coin_status=True)
+    alltimebest = Coin.objects.filter(class_type='alltimebest',coin_status=True)
     coinvote=''
     if(index.user.username ): 
         # print('d',index.user.id) 
@@ -120,11 +70,12 @@ def all(index):
         # join = Coin.objects.annotate(j=CoinVoter()) 
         # print(join)
         # print(allcoin)
-    return render(index, 'cryptocoinersite/home.html' , {'promote':promote,'coinvote':coinvote , 'coins':alltimebest}) 
+    return render(index, 'cryptocoinersite/home.html' , {'banners':banners, 'promote':promote,'coinvote':coinvote , 'coins':alltimebest}) 
     
 def presale(index):
-    promote = Coin.objects.filter(class_type='promoted')
-    presale = Coin.objects.filter(class_type='presale')
+    banners = Banner.objects.all()
+    promote = Coin.objects.filter(class_type='promoted',coin_status=True)
+    presale = Coin.objects.filter(class_type='presale',coin_status=True)
     coinvote=''
     if(index.user.username ): 
         # print('d',index.user.id) 
@@ -133,7 +84,7 @@ def presale(index):
         # join = Coin.objects.annotate(j=CoinVoter()) 
         # print(join)
         # print(allcoin)
-    return render(index, 'cryptocoinersite/home.html' , {'promote':promote,'coinvote':coinvote , 'coins':presale}) 
+    return render(index, 'cryptocoinersite/home.html' , {'banners':banners, 'promote':promote,'coinvote':coinvote , 'coins':presale}) 
     
 def myvote(request):
     allcoin = Coin.objects.all()
@@ -191,12 +142,9 @@ def addcoin(request):
         else:
             user = ''
         # user = User.objects.get(username=request.user.username)
-        name = request.POST['name']
-        symbol = request.POST['symbol']
+        te='' 
+        coin_id = request.POST['coinid']
         description = request.POST['description']
-        marketCap = request.POST['marketCap']
-        price = request.POST['price']
-        launchDate = request.POST['launchDate']
         website = request.POST['website']
         telegram = request.POST['telegram']
         twitter = request.POST['twitter']
@@ -204,28 +152,78 @@ def addcoin(request):
         reddit = request.POST['reddit']
         logo = request.POST['logo']
         additionalInfo = request.POST['additionalInfo']
+        launchDate = request.POST['launchDate']
+        t = requests.get("https://api.coingecko.com/api/v3/coins/"+coin_id+"?tickers=true&market_data=true&community_data=true&developer_data=true&sparkline=true").text
+        te = json.loads(t)
+        
+        coin_id=''
+        coin_name=''
+        coin_symbol=''
+        coin_dis=''
+        market_cap=''
+        price=''
+        h1=''
+        h24=''
+        launch_date=''
+        image=''
+
+        if('error' in te):
+            print('coin not found')
+        else:
+            pass 
+            coin_id = te['id']
+            coin_name = te['name']
+            coin_symbol = te['symbol']
+            coin_dis = te['description']['en']
+            price = te['market_data']['current_price']['usd']
+            market_cap = te['market_data']['market_cap']['usd']
+            h1 = te['market_data']['price_change_percentage_1h_in_currency']['usd']
+            h24 = te['market_data']['price_change_percentage_24h']
+            image = te['image']['large']
+            # print(h24) 
+            addcoin = Coin(coin_id=coin_id,
+            coin_name=coin_name,
+            coin_symbol=coin_symbol,
+            coin_dis=coin_dis,
+            price=price,
+            market_cap=market_cap,
+            h1=h1,
+            h24=h24,
+            image=image,
+            coin_discription = description, 
+            launch_date = launchDate,
+            website = website,
+            telegram = telegram,
+            twitter = twitter,
+            discord = discord,
+            reddit = reddit,
+            logo = logo,
+            additional_info = additionalInfo,
+            vote = 0,
+            user = user,
+            class_type = 'none',
+            )
+            addcoin.save()
+        
+        # name = request.POST['name']
+        # symbol = request.POST['symbol']
+        
+        # marketCap = request.POST['marketCap']
+        # price = request.POST['price']
+        
+        
        
-        addcoin = Coin(coin_name = name, 
-        coin_symbol = symbol, 
-        coin_discription = description, 
-        market_cap = marketCap, 
-        price = price,
-        launch_date = launchDate,
-        website = website,
-        telegram = telegram,
-        twitter = twitter,
-        discord = discord,
-        reddit = reddit,
-        logo = logo,
-        additional_info = additionalInfo,
-        vote = 0,
-        user = user,
-        class_type = 'none',
+        # addcoin = Coin(coin_name = name, 
+        # coin_symbol = symbol, 
+        
+        # market_cap = marketCap, 
+        # price = price,
         
         
-        )
-        addcoin.save()
-        print(name)
+        
+        # )
+        # addcoin.save()
+        # print(name)
          
         messages.success(request, "Your Coin is added successfully Please wait for approrvel.")
         return redirect('/addcoin')
