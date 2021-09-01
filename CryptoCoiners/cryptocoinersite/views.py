@@ -168,7 +168,8 @@ def addcoin(request):
         image=''
 
         if('error' in te):
-            print('coin not found')
+            messages.success(request, "Your Coin Not found.")
+            return redirect('/addcoin')
         else:
             pass 
             coin_id = te['id']

@@ -166,10 +166,7 @@ Home {% endblock title %} {% block tabhome %} active {% endblock tabhome %}
 
     function voter() {
 
-        {
-            %
-            for vote in coinvote %
-        }
+        {% for vote in coinvote %}
         //alert('{{vote.coinid.id}}');
         //alert(document.getElementById('btn{{vote.coinid.id}}'));
         //alert(vote.coinid.id);
@@ -178,9 +175,7 @@ Home {% endblock title %} {% block tabhome %} active {% endblock tabhome %}
             document.getElementById('btn{{vote.coinid.id}}').innerHTML =
                 '<button class="UpvoteButton_UpvoteButton__2emOP UpvoteButton_upvoted__2x7eD UpvoteButton_small__3vQ9d"><span>🚀</span>{{vote.coinid.vote}}</button>'
 
-        } {
-            % endfor %
-        }
+        } {% endfor %}
 
 
     }
